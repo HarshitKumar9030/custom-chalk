@@ -1,5 +1,5 @@
 {
-  "name": "custom-chalk",
+  "name": "simple-chalk",
   "version": "1.0.0",
   "description": "an alternative to chalk package",
   "main": "dist/index.js",
