@@ -9,7 +9,7 @@ A simple alternative to chalk for those who don't need all the features just a s
 ```
 
 ```
-    yarn add simple-chalk 
+ yarn add simple-chalk 
  ```
 
 
