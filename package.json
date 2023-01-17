@@ -2,7 +2,7 @@
   "name": "custom-chalk",
   "version": "1.0.0",
   "description": "an alternative to chalk package",
-  "main": "/dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
   },
