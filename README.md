@@ -5,9 +5,9 @@ A simple alternative to chalk for those who don't need all the features just a s
 ## Installation
 
 ```bash
- npm install simple-chalk \n
- OR \n
-    yarn add simple-chalk
+ npm install simple-chalk 
+         OR 
+ yarn add simple-chalk
 ```
 
 ## Usage
