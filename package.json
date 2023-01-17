@@ -1,0 +1,15 @@
+{
+  "name": "custom-chalk",
+  "version": "1.0.0",
+  "description": "an alternative to chalk package",
+  "main": "/dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": "https://github.com/HarshitKumar9030/custom-chalk",
+  "author": "Harshit Kumar <93194961+HarshitKumar9030@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
