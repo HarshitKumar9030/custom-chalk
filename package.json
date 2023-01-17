@@ -9,6 +9,9 @@
   "repository": "https://github.com/HarshitKumar9030/custom-chalk",
   "author": "Harshit Kumar <93194961+HarshitKumar9030@users.noreply.github.com>",
   "license": "MIT",
+  "publishConfig": {
+  "registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "typescript": "^4.9.4"
   }
