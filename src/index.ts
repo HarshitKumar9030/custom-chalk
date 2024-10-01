@@ -1,13 +1,78 @@
 class Text {
   private text: string;
   private styles: string[] = [];
+  private is256ColorsEnabled: boolean;
+  private isTrueColorEnabled: boolean;
 
   constructor(text: string) {
     this.text = text;
+    this.is256ColorsEnabled = this.detect256ColorSupport();
+    this.isTrueColorEnabled = this.detectTrueColorSupport();
+  }
+
+  private detect256ColorSupport(): boolean {
+    return !!(process.env.TERM && process.env.TERM.includes('256color'));
+  }
+
+  private detectTrueColorSupport(): boolean {
+    return !!(process.env.COLORTERM && process.env.COLORTERM === 'truecolor');
   }
 
   public addStyle(style: string) {
     this.styles.push(style);
+    return this;
+  }
+
+  public color(r: number, g: number, b: number) {
+    if (this.isTrueColorEnabled) {
+      this.styles.push(`38;2;${r};${g};${b}`);
+    }
+    return this;
+  }
+
+  public bgColor(r: number, g: number, b: number) {
+    if (this.isTrueColorEnabled) {
+      this.styles.push(`48;2;${r};${g};${b}`);
+    }
+    return this;
+  }
+
+  public color256(code: number) {
+    if (this.is256ColorsEnabled) {
+      this.styles.push(`38;5;${code}`);
+    }
+    return this;
+  }
+
+  public bgColor256(code: number) {
+    if (this.is256ColorsEnabled) {
+      this.styles.push(`48;5;${code}`);
+    }
+    return this;
+  }
+
+  public bold() {
+    this.styles.push('1');
+    return this;
+  }
+
+  public dim() {
+    this.styles.push('2');
+    return this;
+  }
+
+  public italic() {
+    this.styles.push('3');
+    return this;
+  }
+
+  public underline() {
+    this.styles.push('4');
+    return this;
+  }
+
+  public strikethrough() {
+    this.styles.push('9');
     return this;
   }
 
@@ -16,6 +81,15 @@ class Text {
   }
 }
 
+// Define a color palette with customizable themes and color aliasing
+const theme = {
+  success: (text: string) => new Text(text).color(0, 255, 0).bold().toString(),
+  error: (text: string) => new Text(text).color(255, 0, 0).bold().underline().toString(),
+  warning: (text: string) => new Text(text).color(255, 165, 0).bold().toString(),
+  info: (text: string) => new Text(text).color(0, 0, 255).italic().toString(),
+};
+
+// Base 16-color ANSI styles 
 export const black = (text: string) => new Text(text).addStyle('30').toString();
 export const red = (text: string) => new Text(text).addStyle('31').toString();
 export const green = (text: string) => new Text(text).addStyle('32').toString();
@@ -54,3 +128,15 @@ export const bgLightGreen = (text: string) => new Text(text).addStyle('102').toS
 export const bgLightYellow = (text: string) => new Text(text).addStyle('103').toString();
 export const bgLightBlue = (text: string) => new Text(text).addStyle('104').toString();
 export const bgLightMagenta = (text: string) => new Text(text).addStyle('105').toString();
+
+// Advanced 256-color and Truecolor (24-bit) support
+export const color256 = (text: string, code: number) => new Text(text).color256(code).toString();
+export const bgColor256 = (text: string, code: number) => new Text(text).bgColor256(code).toString();
+export const trueColor = (text: string, r: number, g: number, b: number) => new Text(text).color(r, g, b).toString();
+export const bgTrueColor = (text: string, r: number, g: number, b: number) => new Text(text).bgColor(r, g, b).toString();
+
+
+export const success = theme.success;
+export const error = theme.error;
+export const warning = theme.warning;
+export const info = theme.info;
